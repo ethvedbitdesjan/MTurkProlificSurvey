@@ -408,6 +408,8 @@
     const num_groups = Math.floor(allImageUrls.length / images_per_hit);
     var start_idx = Math.min(group * images_per_hit, allImageUrls.length);
     var end_idx = Math.min((group + 1) * images_per_hit, allImageUrls.length);
+    start_idx = 0;
+    end_idx = 300;
     imageUrls = allImageUrls.slice(start_idx, end_idx);
     if (imageUrls.length < images_per_hit) {
       var num_extra = images_per_hit - imageUrls.length;
