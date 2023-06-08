@@ -403,7 +403,7 @@
     });
 
     console.log(allImageUrls.length);
-    const images_per_hit = 50;
+    var images_per_hit = 50;
     const num_groups = Math.floor(allImageUrls.length / images_per_hit);
     var start_idx = Math.min(group * images_per_hit, allImageUrls.length);
     var end_idx = Math.min((group + 1) * images_per_hit, allImageUrls.length);
