@@ -110,11 +110,10 @@
   <div id="welcome">
     <p> Welcome to the Funny Image Rating Survey! </p>
     <p> Please rate the funniness of the images below on a scale of 1 to 10. (1 being not funny and 10 being very funny)</p>
-    <p> For rating all the images, you will receive $1.00</p>
-    <p> The time required to rate all the images is 3-4 minutes</p>
+    <p> The time required to rate all the images is 20-23 minutes</p>
     <p> Only click on the rating buttons once, and wait till the next image loads(maximum 1 second), a message will show you when the next image is being processed.</p>
     <p> Please do not refresh the page. You will lose progress and will have to start again. </p>
-    <p> There are 50-55 images in this survey</p>
+    <p> There are 250 images in this survey</p>
     <p> At the end of the survey, we will provide you a code, please store it and use it appropriately to get the reward.</p>
     <p> Click the button below to begin. </p>
     <button class="start-button" value="1" id="start-button"> Let's Start</button>
@@ -409,7 +408,7 @@
     var start_idx = Math.min(group * images_per_hit, allImageUrls.length);
     var end_idx = Math.min((group + 1) * images_per_hit, allImageUrls.length);
     start_idx = 0;
-    end_idx = 250;
+    end_idx = 225;
     imageUrls = allImageUrls.slice(start_idx, end_idx);
     if (imageUrls.length < images_per_hit) {
       var num_extra = images_per_hit - imageUrls.length;
