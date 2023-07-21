@@ -415,13 +415,14 @@
     });
 
     console.log(allImageUrls.length);
-    var images_per_hit = 104;
+    var images_per_hit = 100;
+    group = group % 3;
     const num_groups = Math.floor(allImageUrls.length / images_per_hit);
     var start_idx = Math.min(group * images_per_hit, allImageUrls.length);
     var end_idx = Math.min((group + 1) * images_per_hit, allImageUrls.length);
     imageUrls = allImageUrls.slice(start_idx, end_idx);
     console.log(imageUrls.length);
-    images_per_hit = 104;
+    images_per_hit = 100;
     if (imageUrls.length < images_per_hit) {
       console.log("adding images");
       var num_extra = images_per_hit - imageUrls.length;
