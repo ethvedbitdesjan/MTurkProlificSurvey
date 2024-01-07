@@ -118,7 +118,8 @@
   <div id="welcome">
     <p> Welcome to the Funny Image Rating Survey! </p>
     <p> Please rate the funniness of the images below on a scale of 1 to 10. (1 being not funny and 10 being very funny)</p>
-    <p> The time required to rate all the images is 9-10 minutes</p>
+    <p> For each image write a single word in the box that is the most prominent feature of the image, for funny images write a word that makes the image funny,for not funny image, just write a word about the most prominent feature of the image.</p>
+    <p> The time required to rate all the images is 9-11 minutes</p>
     <p> Only click on the rating buttons once, and wait till the next image loads(maximum 1 second), a message will show you when the next image is being processed.</p>
     <p> Please do not refresh the page. You will lose progress and will have to start again. </p>
     <p> There are 100-120 images in this survey</p>
@@ -359,6 +360,9 @@
 
   <div id="rating-container" style="display: none;">
     <p>How funny is the image?</p>
+    <div>
+      <input type="text" id="input-text" value="" placeholder="word">
+    </div>
     <div style="display: flex; flex-direction: row; text-align: center; justify-content: center;">
       <p style="width: 100px;">Not Funny</p>
       <div id="rating-buttons">
@@ -423,7 +427,6 @@
     var end_idx = Math.min((group + 1) * images_per_hit, allImageUrls.length);
     imageUrls = allImageUrls.slice(start_idx, end_idx);
     console.log(imageUrls.length);
-    images_per_hit = 100;
     if (imageUrls.length < images_per_hit) {
       console.log("adding images");
       var num_extra = images_per_hit - imageUrls.length;
@@ -434,17 +437,6 @@
     }
 
     var image_len = imageUrls.length;
-    let sample_images = ['F215.jpg',
-                        'F29.jpg',
-                        'F881.jpg',
-                        'F490.jpg',
-                        'F51.jpg',
-                        'F707.jpg',
-                        'F160.jpg',
-                        'F292.jpg',
-                        'F118.jpg',
-                        'F171.jpg']
-    Array.prototype.push.apply(imageUrls, sample_images);
     for (let i = 0; i < Math.floor(0.1 * image_len); i++) {
       var random_idx = (Math.floor(Math.random() * image_len));
       imageUrls.push(imageUrls[random_idx]);
@@ -509,8 +501,14 @@
         alert('Please spend more time looking at the image before rating it.');
         count_time++;
         if (count_time > 3) {
+          console.log('too quick');
           ShowEndSurveyQuickClick();
         }
+        return;
+      }
+      var input_text = document.getElementById('input-text').value;
+      if (input_text === undefined || input_text === "") {
+        alert('Please enter a word in the box that is the most prominent feature of the image, for funny images write a word that makes the image funny,for not funny image, just write a word about the most prominent feature of the image.');
         return;
       }
       previous.push(buttonValue);
@@ -523,13 +521,15 @@
           }
         }
         if (all_same) {
+          console.log('same');
           ShowEndSurveyQuickClick();
           return;
         }
         previous.shift();
       }
       rating = buttonValue;
-      ratings_list.push([imageUrls[imageIndex], rating]);
+      ratings_list.push([imageUrls[imageIndex], rating, input_text]);
+      document.getElementById('input-text').value = "";
       if (imageIndex < imageUrls.length - 1) {
         imageIndex++;
         displayImage();
